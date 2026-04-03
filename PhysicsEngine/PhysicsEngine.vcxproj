@@ -301,16 +301,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Body.h" />
     <ClInclude Include="include\resource_dir.h" />
-    <ClInclude Include="Random.h" />
-    <ClInclude Include="World.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="void.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClInclude Include="src\PhysicEngine\Body.h" />
+    <ClInclude Include="src\PhysicEngine\Random.h" />
+    <ClInclude Include="src\PhysicEngine\World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico" />
@@ -325,6 +319,11 @@
     <ProjectReference Include="raylib.vcxproj">
       <Project>{8898EA18-743A-15EF-5DF5-284349369C3F}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\PhysicEngine\Body.cpp" />
+    <ClCompile Include="src\PhysicEngine\main.cpp" />
+    <ClCompile Include="src\PhysicEngine\World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
