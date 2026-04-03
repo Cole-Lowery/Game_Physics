@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CLowery_LeetCode
+{
+    internal class Solution
+    {
+        public int Divide(int dividend, int divisor)
+        {
+
+            return 0;
+        }
+    }
+}

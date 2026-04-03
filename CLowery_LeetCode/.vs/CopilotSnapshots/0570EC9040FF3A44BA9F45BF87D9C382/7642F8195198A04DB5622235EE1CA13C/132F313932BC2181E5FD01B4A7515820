@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CLowery_LeetCode
+{
+    internal class Solution
+    {
+        public int Divide(int dividend, int divisor)
+        {
+            // PSEUDOCODE:
+
+            // 1. Handle edge case: overflow
+            //    IF dividend == INT_MIN (-2^31) AND divisor == -1
+            //        RETURN INT_MAX (2^31 - 1)  // would overflow
+
+            // 2. Determine sign of result
+            //    negative = (dividend < 0) XOR (divisor < 0)
+
+            // 3. Work with absolute values to simplify logic
+            //    Convert dividend and divisor to positive long values
+            //    (use long to avoid overflow when converting INT_MIN)
+
+            // 4. Perform division using repeated subtraction with optimization
+            //    quotient = 0
+            //    WHILE dividend >= divisor:
+            //        temp_divisor = divisor
+            //        multiple = 1
+            //        
+            //        // Find largest multiple using bit shifting (doubling)
+            //        WHILE dividend >= (temp_divisor << 1):
+            //            temp_divisor = temp_divisor << 1  // double it
+            //            multiple = multiple << 1          // double the count
+            //        
+            //        dividend = dividend - temp_divisor
+            //        quotient = quotient + multiple
+
+            // 5. Apply sign to result
+            //    IF negative:
+            //        quotient = -quotient
+
+            // 6. Return quotient
+
+            return 0;
+        }
+    }
+}
