@@ -1,5 +1,4 @@
-#pragma once
-#include "Body.h"
+#include "src/PhysicEngine/Body.h"
 
 inline void SemiImplicitEuler(Body& body, float deltaTime)
 {

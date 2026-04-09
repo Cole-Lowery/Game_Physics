@@ -37,6 +37,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\PhysicEngine\GravitationalEffector.h" />
+    <ClInclude Include="src\PhysicEngine\collision.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">
@@ -67,5 +68,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\PhysicEngine\GravitationalEffector.cpp" />
+    <ClCompile Include="src\PhysicEngine\collision.cpp" />
   </ItemGroup>
 </Project>

@@ -304,6 +304,7 @@
     <ClInclude Include="include\resource_dir.h" />
     <ClInclude Include="Intergrator.h" />
     <ClInclude Include="src\PhysicEngine\Body.h" />
+    <ClInclude Include="src\PhysicEngine\collision.h" />
     <ClInclude Include="src\PhysicEngine\Effector.h" />
     <ClInclude Include="src\PhysicEngine\GravitationalEffector.h" />
     <ClInclude Include="src\PhysicEngine\PointEffector.h" />
@@ -326,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PhysicEngine\Body.cpp" />
+    <ClCompile Include="src\PhysicEngine\collision.cpp" />
     <ClCompile Include="src\PhysicEngine\GravitationalEffector.cpp" />
     <ClCompile Include="src\PhysicEngine\main.cpp" />
     <ClCompile Include="src\PhysicEngine\PointEffector.cpp" />

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Body.h"
+#include "collision.h"
 #include <vector>
 
 class Effector;
@@ -10,6 +11,7 @@ public:
 	Vector2 gravity{ 0, 9.81f };
 	std::vector<Body> bodies;
 	std::vector<Effector*> effectors;
+	std::vector<Contact> contacts;
 
 public:
 	World();
@@ -17,4 +19,5 @@ public:
 	void Draw();
 	void AddBody(const Body& body);
 	void AddEffector(Effector* effector);
+	void UpdateCollision();
 };

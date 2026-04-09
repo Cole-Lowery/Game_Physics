@@ -14,7 +14,7 @@ int main ()
 	World world;
 	SetRandomSeed(5);
 
-	world.AddEffector(new GravitationalEffector(10000.0f));
+	world.AddEffector(new GravitationalEffector(1000.0f));
 
 	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
@@ -42,20 +42,19 @@ int main ()
 			direction.x = cosf(angle);
 			direction.y = sinf(angle);
 
-			body.velocity = direction * (50.0f + (GetRandomFloat() * 300));
+			body.velocity = Vector2{ 0, 0 };
 			body.acceleration = Vector2{ 0, 0 };
 			body.size = 5.0f + (GetRandomFloat() * 20.0f);
 			body.restitution = 0.5f + (GetRandomFloat() * 0.5f);
 			body.mass = body.size;
 			body.damping = 0.01f;
-			body.gravityScale = 1.0f;
+			body.gravityScale = 0.0f;
 			body.inverseMass = (body.bodyType == BodyType::STATIC) ? 0 : 1.0f / body.mass ;
 
 			world.AddBody(body);
 		}
 
 		// UPDATE
-		DrawCircleV(currentMousePosition, 5, SKYBLUE);
 
 		world.Step(deltaTime);
 
