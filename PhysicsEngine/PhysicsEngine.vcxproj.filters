@@ -27,6 +27,16 @@
     <ClInclude Include="src\PhysicEngine\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Intergrator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicEngine\Effector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicEngine\PointEffector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicEngine\GravitationalEffector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">
@@ -53,5 +63,9 @@
     <ClCompile Include="src\PhysicEngine\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PhysicEngine\PointEffector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicEngine\GravitationalEffector.cpp" />
   </ItemGroup>
 </Project>

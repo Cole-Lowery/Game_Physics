@@ -302,7 +302,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\resource_dir.h" />
+    <ClInclude Include="Intergrator.h" />
     <ClInclude Include="src\PhysicEngine\Body.h" />
+    <ClInclude Include="src\PhysicEngine\Effector.h" />
+    <ClInclude Include="src\PhysicEngine\GravitationalEffector.h" />
+    <ClInclude Include="src\PhysicEngine\PointEffector.h" />
     <ClInclude Include="src\PhysicEngine\Random.h" />
     <ClInclude Include="src\PhysicEngine\World.h" />
   </ItemGroup>
@@ -322,7 +326,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\PhysicEngine\Body.cpp" />
+    <ClCompile Include="src\PhysicEngine\GravitationalEffector.cpp" />
     <ClCompile Include="src\PhysicEngine\main.cpp" />
+    <ClCompile Include="src\PhysicEngine\PointEffector.cpp" />
     <ClCompile Include="src\PhysicEngine\World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,72 +1,81 @@
+
+
 #include "raylib.h"
 #include "raymath.h"
-#include "resource_dir.h"
+#include "resource_dir.h" 
+
 #include "Body.h"
 #include "World.h"
 #include "Random.h"
+#include "GravitationalEffector.h"
 
-int main()
+int main ()
 {
-    // Initialize world
-    World world;
+	World world;
+	SetRandomSeed(5);
 
-    SetRandomSeed(5);
-    SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
-    InitWindow(1280, 800, "Hello Raylib");
-    SearchAndSetResourceDir("resources");
+	world.AddEffector(new GravitationalEffector(10000.0f));
 
-    Texture wabbit = LoadTexture("wabbit_alpha.png");
+	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
-    // Game loop
-    while (!WindowShouldClose())
-    {
-        float deltaTime = GetFrameTime();
+	InitWindow(1280, 800, "Physics Engine");
 
-        // Input: Spawn bodies on left click
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-        {
-            Body body = { 0 };
-            body.position = GetMousePosition();
+	SearchAndSetResourceDir("resources");
 
-            float angle = GetRandomFloat() * (2 * PI);
-            Vector2 direction;
-            direction.x = cosf(angle);
-            direction.y = sinf(angle);
+	while (!WindowShouldClose())		
+	{
+		float deltaTime = GetFrameTime();
+		Vector2 currentMousePosition = GetMousePosition();
 
-            body.velocity = Vector2Scale(direction, GetRandomFloat(300.0f));
-            body.acceleration = Vector2{ 0, 0 };
-            body.size = (float)GetRandomValue(5, 20);
-            body.restitution = 1.0f;
-            body.mass = body.size * 10;
+		if (IsKeyDown(KEY_LEFT_SHIFT)) deltaTime = 0.0f;
 
-            world.AddBody(body);
-        }
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || (IsKeyDown(KEY_LEFT_CONTROL) && IsMouseButtonDown(MOUSE_BUTTON_LEFT)) ) {
+			Body body;
 
-        // Input: Apply attraction force on right click
-        if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
-        {
-            Vector2 position = GetMousePosition();
-            world.ApplyAttraction(position, 100.0f, 30000.0f);
-            DrawCircleLinesV(position, 100, GREEN);
-        }
+			body.bodyType =(IsKeyDown(KEY_LEFT_ALT)) ? BodyType::STATIC : BodyType::DYNAMIC;
 
-        // Update physics
-        world.Step(deltaTime);
+			body.position = currentMousePosition;
 
-        // Draw
-        BeginDrawing();
-        ClearBackground(BLACK);
+			float angle = GetRandomFloat() * (2 * PI);
 
-        DrawText("Hello Raylib", 200, 200, 20, WHITE);
-        DrawTexture(wabbit, 400, 200, WHITE);
+			Vector2 direction;
+			direction.x = cosf(angle);
+			direction.y = sinf(angle);
 
-        world.Draw();
+			body.velocity = direction * (50.0f + (GetRandomFloat() * 300));
+			body.acceleration = Vector2{ 0, 0 };
+			body.size = 5.0f + (GetRandomFloat() * 20.0f);
+			body.restitution = 0.5f + (GetRandomFloat() * 0.5f);
+			body.mass = body.size;
+			body.damping = 0.01f;
+			body.gravityScale = 1.0f;
+			body.inverseMass = (body.bodyType == BodyType::STATIC) ? 0 : 1.0f / body.mass ;
 
-        EndDrawing();
-    }
+			world.AddBody(body);
+		}
 
-    UnloadTexture(wabbit);
-    CloseWindow();
+		// UPDATE
+		DrawCircleV(currentMousePosition, 5, SKYBLUE);
 
-    return 0;
+		world.Step(deltaTime);
+
+		// DRAW
+		BeginDrawing();
+
+		ClearBackground(BLACK);
+
+		DrawText("Physics Engine", 200, 200, 20, WHITE);
+
+
+		// Add world draw method here
+		world.Draw();
+		
+		// end the frame and get ready for the next one  (display frame, poll input, etc...)
+		EndDrawing();
+	}
+
+
+	// destroy the window and cleanup the OpenGL context
+	CloseWindow();
+	return 0;
 }

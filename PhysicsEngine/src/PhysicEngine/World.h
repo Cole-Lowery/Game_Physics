@@ -1,21 +1,20 @@
 #pragma once
+
 #include "Body.h"
 #include <vector>
 
-class World
-{
-public:
-    World();
-    
-    void AddBody(const Body& body);
-    void Step(float deltaTime);
-    void Draw() const;
-    void ApplyGravity();
-    void ApplyAttraction(Vector2 position, float radius, float strength);
-    void HandleCollisions();
-    
-    Vector2 gravity;
+class Effector;
 
-private:
-    std::vector<Body> bodies;
+class World {
+public:
+	Vector2 gravity{ 0, 9.81f };
+	std::vector<Body> bodies;
+	std::vector<Effector*> effectors;
+
+public:
+	World();
+	void Step(float deltaTime);
+	void Draw();
+	void AddBody(const Body& body);
+	void AddEffector(Effector* effector);
 };

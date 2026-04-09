@@ -1,24 +1,34 @@
+#include "raylib.h"
 #include "Body.h"
 
-void Body::AddForce(Vector2 force)
-{
-    acceleration.x += force.x / mass;
-    acceleration.y += force.y / mass;
+void Body::Step(float deltaTime) {
+	if (bodyType == BodyType::STATIC) return;
+
+	velocity += acceleration * deltaTime;
+	position += velocity * deltaTime;
 }
 
-void Body::Step(float deltaTime)
-{
-    // Semi-implicit Euler integration
-    velocity.x += acceleration.x * deltaTime;
-    velocity.y += acceleration.y * deltaTime;
-    position.x += velocity.x * deltaTime;
-    position.y += velocity.y * deltaTime;
-    
-    // Reset acceleration
-    acceleration = Vector2{ 0, 0 };
+void Body::Draw() {
+	DrawCircleV(position, size, ORANGE);
+	DrawCircleLinesV(position, size, WHITE);
 }
 
-void Body::Draw() const
-{
-    DrawCircleV(position, size, RED);
+void Body::AddForce(Vector2 force, ForceMode forceMode) {
+	if (bodyType != BodyType::DYNAMIC) return;
+	switch (forceMode) {
+		case ForceMode::FORCE:
+			acceleration += force * inverseMass;
+			break;
+		case ForceMode::IMPULSE:
+		velocity += force * inverseMass;
+		break;
+		case ForceMode::ACCELERATION:
+			acceleration += force;
+			break;
+		case ForceMode::VELOCITY_CHANGE:
+			velocity += force;
+			break;
+	}
+	
+
 }
