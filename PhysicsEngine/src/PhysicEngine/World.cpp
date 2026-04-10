@@ -64,6 +64,7 @@ void World::UpdateCollision()
 	contacts.clear();
 	CreateContacts(bodies, contacts);
 	SeparateContacts(contacts);
+	ResolveContacts(contacts);
 
 	for (auto& body : bodies)
 	{

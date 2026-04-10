@@ -49,3 +49,29 @@ void SeparateContacts(std::vector<Contact>& contacts)
 		contact.bodyB->position = Vector2Subtract(contact.bodyB->position, Vector2Scale(separation, contact.bodyB->inverseMass));
 	}
 }
+
+void ResolveContacts(std::vector<Contact>& contacts)
+{
+	for (auto& contact : contacts)
+	{
+		// compute relative velocity
+		Vector2 rv = Vector2Subtract(contact.bodyA->velocity, contact.bodyB->velocity);
+		// project relative velocity onto the contact normal
+		float nv = Vector2DotProduct(rv, contact.normal);
+
+		// skip if bodies are separating
+		if (nv > 0) continue;
+
+		// total inverse mass = (1/mA + 1/mB)
+		float totalInverseMass = contact.bodyA->inverseMass + contact.bodyB->inverseMass;
+		// impulse scalar = -(1 + restitution) * vn / (1/mA + 1/mB)
+		float impulseMagnitude = -(1 + contact.restitution) * nv / totalInverseMass;
+
+		// impulse vector along contact normal
+		Vector2 impulse = Vector2Scale(contact.normal, impulseMagnitude);
+
+		// apply equal and opposite impulses
+		contact.bodyA->AddForce(impulse, ForceMode::IMPULSE);
+		contact.bodyB->AddForce(Vector2Negate(impulse), ForceMode::IMPULSE);
+	}
+}
